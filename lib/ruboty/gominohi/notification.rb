@@ -11,10 +11,6 @@ module Ruboty
       def message
         "[WIP] #{@date.strftime('%F')} のごみ収集は…"
       end
-
-      def wday_nth(date)
-        (date.day - 1) / 7 + 1
-      end
     end
   end
 end
