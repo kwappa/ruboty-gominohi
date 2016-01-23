@@ -6,7 +6,9 @@ module Ruboty
       def gominohi(message)
         date = Date.easy_parse(message[:date])
         notification = ::Ruboty::Gominohi::Notification.new(date)
-        message.reply(notification.message)
+        str = notification.message
+
+        message.reply(str) unless str.nil?
       end
     end
   end

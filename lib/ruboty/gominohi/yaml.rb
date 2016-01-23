@@ -16,12 +16,31 @@ module Ruboty
         YAML_DIRS.each do |dir|
           filename = File.join(dir, YAML_FILE)
           if File.exists?(filename)
-            @data = ::YAML.load(File.read(filename))
+            @data = deep_symbolize_keys(::YAML.load(File.read(filename)))
             break
           end
         end
 
         raise "#{YAML_FILE} is not found" if @data.nil?
+      end
+
+      private
+
+      def symbolize_keys(hash)
+        hash.each_with_object({}) { |(k, v), result| result[k.to_sym] = v }
+      end
+
+      def deep_symbolize_keys(obj)
+        obj.to_hash.keys.each do |key|
+          case (v = obj.delete(key))
+          when Hash
+            v = symbolize_keys(v)
+          when Array
+            v = v.map{ |x| (symbolize_keys(x) rescue x) }
+          end
+          obj[(key.to_sym rescue key) || key] = v
+        end
+        obj
       end
     end
   end
