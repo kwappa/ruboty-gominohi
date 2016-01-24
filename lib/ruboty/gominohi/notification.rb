@@ -33,7 +33,7 @@ module Ruboty
                        else
                          @yaml.data[:garbage_collectors].map { |name| name.start_with?('@') ? name : "@#{name}" }.join(' ') + ' '
                        end
-n
+
           "#{collectors}#{@date.month}月#{@date.day}日(#{@date.wday_name})のごみ収集は#{str}です。"
         end
       end
