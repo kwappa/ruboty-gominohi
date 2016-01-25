@@ -18,6 +18,10 @@
 
 ### `.gominohi.yml`
 
+- `version`
+    - specify version of this file
+    - compared between app's version
+        - must be same major and minor version (patch version is ignored)
 - `garbage_collectiors`
     - specify member names to send notification (optional)
 - `garbage_collection_days`
