@@ -4,7 +4,7 @@ module Ruboty
       on(/gominohi(?<date>\Z|\s+.+)/, name: 'gominohi', description: 'tell what kind of garbage could be collected today.')
 
       def gominohi(message)
-        date = Date.easy_parse(message[:date])
+        date = Date.easy_parse(message[:date].strip)
         notification = ::Ruboty::Gominohi::Notification.new(date)
         str = notification.message
 
